@@ -9,7 +9,7 @@ Storage classes by IaaS:
 + [vSphere](./storageclass/vsphere.yml)
 + [AWS](./storageclass/aws.yml)
 
-## Sample apps
+## Sample apps
 
 | App | Description |
 |---|---|
