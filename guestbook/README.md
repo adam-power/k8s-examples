@@ -1,6 +1,6 @@
 # Guestbook sample app
 
-Code is mostly borrowed from [the Kubernetes docs](https://kubernetes.io/docs/tutorials/stateless-application/guestbook/).
+Code is mostly borrowed from the Kubernetes docs [Guestbook sample app](https://kubernetes.io/docs/tutorials/stateless-application/guestbook/).
 A `LoadBalancer` service has been added, as well as wrapper scripts.
 
 To deploy, run the following:

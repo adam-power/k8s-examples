@@ -14,3 +14,4 @@ Storage classes by IaaS:
 | App | Description |
 |---|---|
 | [guestbook](./guestbook/) | A simple Redis backend and PHP frontend.<br>Your cluster must have the ability to create `LoadBalancer` services. |
+| [wordpress](./wordpress/) | A simple Redis backend and PHP frontend.<br>Your cluster must have the ability to create `LoadBalancer` services. |
