@@ -1,0 +1,14 @@
+# See Kubernetes docs
+# https://kubernetes.io/docs/concepts/storage/storage-classes/#aws-ebs
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-encrypted
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2 # This is the default
+  encrypted: "true"
+

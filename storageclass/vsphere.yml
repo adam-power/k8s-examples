@@ -1,0 +1,12 @@
+# See VMWare docs
+# https://vmware.github.io/vsphere-storage-for-kubernetes/documentation/storageclass.html
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: thin-disk
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: kubernetes.io/vsphere-volume
+parameters:
+  diskformat: thin
