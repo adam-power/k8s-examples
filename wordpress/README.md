@@ -18,7 +18,11 @@ To get your LoadBalancer's DNS name, run the following `kubectl` command
 (note: the load balancer might take several minutes to become available):
 
 ```bash
-kubectl get svc/wordpress -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
+# On AWS
+kubectl get svc/nginx -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
+
+# On GCP
+kubectl get svc/nginx -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 ```
 
 A password is randomly generated for MySQL.

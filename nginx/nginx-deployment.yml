@@ -1,0 +1,89 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx # latest
+        ports:
+        - containerPort: 80
+        command: ["/bin/bash"]
+        args:
+        - -c
+        - |
+          #!/bin/bash
+          
+          set -eu
+
+          envsubst < /tmp/index.template > /usr/share/nginx/html/index.html
+          nginx -g 'daemon off;'
+
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /tmp
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+data:
+  index.template: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Welcome to nginx!</title>
+    <style>
+        body {
+            width: 35em;
+            margin: 0 auto;
+            font-family: Tahoma, Verdana, Arial, sans-serif;
+        }
+    </style>
+    </head>
+    <body>
+    <h1>Welcome to nginx!</h1>
+    <p>Info about this pod:<br>
+    <ul>
+      <li>Hostname: ${HOSTNAME}</li>
+      <li>Internal service IP: ${NGINX_SERVICE_HOST}</li>
+      <li>Internal service port: ${NGINX_SERVICE_PORT}</li>
+    </ul>
+    </p>
+    </body>
+    </html>
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: nginx
+
