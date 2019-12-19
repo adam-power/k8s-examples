@@ -23,6 +23,15 @@ kubectl get svc/nginx -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
 kubectl get svc/nginx -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 ```
 
+If your cluster has an Ingress Controller set up, you can add an Ingress to this app.
+You must first edit the `ingress.yml` file and replace the hostname placeholder with your
+real ingress hostname for the app.
+Then run the following command:
+
+```bash
+kubectl apply -f ingress.yml
+```
+
 To clean up, run the following:
 
 ```bash
