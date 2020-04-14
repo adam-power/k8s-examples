@@ -8,9 +8,13 @@ metadata:
 data:
   prometheus.yml: |
     global:
-      scrape_interval: 15s # By default, scrape targets every 15 seconds.
+      scrape_interval: 15s
 
     scrape_configs:
     - job_name: 'prometheus'
       static_configs:
       - targets: ['localhost:9090']
+
+    - job_name: 'kubernetes'
+      kubernetes_sd_configs:
+      - role: node
