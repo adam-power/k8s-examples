@@ -69,3 +69,30 @@ kubectl delete pods -l app=prometheus
 |---|---|
 | [basic](./prometheus-configmap-basic.yml) | A hello-world config.  The Prometheus Pod only monitors itself. |
 | [internal k8s](./prometheus-configmap-internal-k8s.yml) | Prometheus monitors the Kubernetes cluster into which it has been deployed. Authentication is handled using internal k8s objects, such as services and service account tokens. |
+| [bosh_exporter](./prometheus-configmap-bosh-exporter.yml) | Prometheus uses the `bosh_exporter` for service discovery. See below for how to deploy the `bosh_exporter` before using this `ConfigMap`. |
+
+## How to deploy the bosh_exporter
+
+First, create the secrets for `bosh_exporter`.
+The instructions below assume that you have exported your BOSH variables using the `om bosh-env` command.
+Check the [bosh_exporter Github page](https://github.com/bosh-prometheus/bosh_exporter) for a full list of available options.
+
+```bash
+kubectl create secret generic \
+  bosh-exporter-env \
+  --from-literal=BOSH_EXPORTER_BOSH_URL="$BOSH_ENVIRONMENT" \
+  --from-literal=BOSH_EXPORTER_BOSH_UAA_CLIENT_ID="$BOSH_CLIENT" \
+  --from-literal=BOSH_EXPORTER_BOSH_UAA_CLIENT_SECRET="$BOSH_CLIENT_SECRET" \
+  --from-literal=BOSH_EXPORTER_BOSH_CA_CERT_FILE="/etc/bosh/ca.crt" \
+  --from-literal=BOSH_EXPORTER_METRICS_ENVIRONMENT="test"
+
+kubectl create secret generic \
+  bosh-exporter-ca \
+  --from-literal=ca.crt="$BOSH_CA_CERT"
+```
+
+Then, create the `bosh_exporter` deployment:
+
+```bash
+kubectl apply -f bosh-exporter-deployment.yml
+```

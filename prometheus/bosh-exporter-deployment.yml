@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bosh-exporter
+  labels:
+    app: bosh-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bosh-exporter
+  template:
+    metadata:
+      labels:
+        app: bosh-exporter
+    spec:
+      containers:
+      - image: boshprometheus/bosh-exporter
+        name: bosh-exporter
+        ports:
+        - containerPort: 9190
+          protocol: TCP
+        envFrom:
+        - secretRef:
+            name: bosh-exporter-env
+        volumeMounts:
+        - name: bosh-exporter-ca
+          mountPath: /etc/bosh
+      volumes:
+      - name: bosh-exporter-ca
+        secret:
+          secretName: bosh-exporter-ca
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bosh-exporter
+  labels:
+    app: bosh-exporter
+spec:
+  selector:
+    app: bosh-exporter
+  ports:
+  - port: 9190
+    protocol: TCP
+    targetPort: 9190
