@@ -21,6 +21,9 @@ spec:
         ports:
         - containerPort: 9190
           protocol: TCP
+          
+        # The secrets used below need to be created manually.
+        # Check the README for more info.
         envFrom:
         - secretRef:
             name: bosh-exporter-env
