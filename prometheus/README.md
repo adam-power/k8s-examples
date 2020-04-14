@@ -2,6 +2,29 @@
 
 A test deployment of Prometheus to monitor your cluster.
 
+## Pre-requisites for a PKS cluster
+
+If testing this on PKS, your cluster must have the following settings enabled:
+
+- Host monitoring:
+  - Telegraf outputs should be enabled
+  - All boxes under "Enable Telegraf Outputs" should be checked
+  - You should have the following Telegraf configuration:
+
+      ```toml
+      # Publish all metrics to /metrics for Prometheus to scrape
+      [[outputs.prometheus_client]]
+        ## Address to listen on.
+        listen = ":9273"
+      ```
+
+- In-cluster monitoring:
+  - cAdvisor should be deployed
+  - Metric Sinks should be enabled
+  - Node Exporters on workers should be enabled
+
+## Usage
+
 To deploy, run the following:
 
 ```bash
