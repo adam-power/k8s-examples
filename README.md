@@ -11,10 +11,17 @@ Storage classes by IaaS:
 
 ## Sample apps
 
+**Note:** These all require that your cluster has `LoadBalancer` services working.
+
 | App | Description |
 |---|---|
-| [guestbook](./guestbook/) | A simple Redis backend and PHP frontend.<br>Your cluster must have the ability to create `LoadBalancer` services. |
-| [wordpress](./wordpress/) | A simple Redis backend and PHP frontend.<br>Your cluster must have the ability to create `LoadBalancer` services. |
+| [guestbook](./guestbook/) | A simple Redis backend and PHP frontend. |
+| [wordpress](./wordpress/) | A simple Redis backend and PHP frontend. |
+| [nginx](./nginx/) | A sample NGINX app with optional Ingress add-on. |
+
+## Prometheus examples
+
+The [prometheus](./prometheus/) folder contains a minimal Prometheus deployment, as well as example configs.
 
 ## Utilities
 
