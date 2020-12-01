@@ -5,7 +5,7 @@ A sample that can be used to test
 configuration.
 
 This example creates an nginx Pod and Service, and a NetworkPolicy that
-prevents access to the Pod unless the client has the label 'access="true"'.
+prevents access to the Pod unless the client has the label `access="true"`.
 
 To set up the example, run the following:
 
