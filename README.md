@@ -23,6 +23,11 @@ Storage classes by IaaS:
 
 The [prometheus](./prometheus/) folder contains a minimal Prometheus deployment, as well as example configs.
 
+## NetworkPolicy example
+
+The [networkpolicy](./networkpolicy/) folder contains an example that can be used to test whether a k8s cluster is
+enforcing NetworkPolicies.
+
 ## Utilities
 
 To start a test pod and attach to it, run the `test_pod.sh` script:
