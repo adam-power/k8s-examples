@@ -17,14 +17,14 @@ First, verify that an ordinary Pod cannot access nginx:
 
 ```bash
 # The following should produce the error 'download timed out'
-kubectl run busybox --rm -ti --image=busybox -- wget --spider --timeout=1 nginx
+kubectl run busybox --rm -ti --image=busybox -- wget --spider --timeout=15 nginx
 ```
 
 Then, try to run the same command from a Pod that has the correct label:
 
 ```bash
 # The following command should say 'remote file exists'
-kubectl run busybox --rm -ti --labels="access=true" --image=busybox -- wget --spider --timeout=1 nginx
+kubectl run busybox --rm -ti --labels="access=true" --image=busybox -- wget --spider --timeout=15 nginx
 ```
 
 To clean up, run the following:
