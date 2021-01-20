@@ -13,6 +13,13 @@ To set up the example, run the following:
 ./create.sh
 ```
 
+**Note:** If you are using RBAC on TKG, you will need to bind a
+`ClusterRole` to your default serviceaccount so the Pod can be scheduled:
+
+```bash
+kubectl apply -f tkg-rbac.yml
+```
+
 First, verify that an ordinary Pod cannot access nginx:
 
 ```bash
