@@ -14,14 +14,12 @@ if [ "$#" -eq 2 ]; then
   kubectl -n "$namespace" \
     run -it test-pod \
     --image="$test_image" \
-    --generator=run-pod/v1 \
     --rm \
     --
 else
   kubectl \
     run -it test-pod \
     --image="$test_image" \
-    --generator=run-pod/v1 \
     --rm \
     --
 fi
