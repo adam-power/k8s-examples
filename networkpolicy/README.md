@@ -17,7 +17,7 @@ To set up the example, run the following:
 `ClusterRole` to your default serviceaccount so the Pod can be scheduled:
 
 ```bash
-kubectl apply -f tkg-rbac.yml
+kubectl apply -f ../util/tkg-rbac.yml
 ```
 
 First, verify that an ordinary Pod cannot access nginx:

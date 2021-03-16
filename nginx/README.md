@@ -12,6 +12,13 @@ To deploy, run the following:
 ./create.sh
 ```
 
+**Note:** If you are using RBAC on TKG, you will need to bind a
+`ClusterRole` to your default serviceaccount so the Pod can be scheduled:
+
+```bash
+kubectl apply -f ../util/tkg-rbac.yml
+```
+
 To get your LoadBalancer's DNS name, run the following `kubectl` command
 (note: the load balancer might take several minutes to become available):
 
